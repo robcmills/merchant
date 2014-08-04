@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<QGWRequest> 
+  <Authentication> 
+    <GatewayLogin>{{ gateway_login }}</GatewayLogin> 
+    <GatewayKey>{{ gateway_key }}</GatewayKey> 
+  </Authentication> 
+
+  <Request> 
+    <RequestType>{{ request_type }}</RequestType> 
+    <TransactionType>{{ transaction_type }}</TransactionType> 
+    <PaymentType>{{ payment_type }}</PaymentType> 
+    <Amount>{{ amount }}</Amount> 
+    <CreditCardNumber>{{ cc_number }}</CreditCardNumber> 
+    <ExpireMonth>{{ expire_month }}</ExpireMonth> 
+    <ExpireYear>{{ expire_year }}</ExpireYear> 
+    <CVV2>{{ cvv }}</CVV2> 
+    <ABANumber>{{ aba_number }}</ABANumber> 
+    <AccountNumber>{{ account_number }}</AccountNumber> 
+    <AccountType>{{ account_type }}</AccountType> 
+    <Memo>{{ memo }}</Memo> 
+    <FirstName>{{ first_name }}</FirstName> 
+    <LastName>{{ last_name }}</LastName> 
+    <Address>{{ address }}</Address>
+    <City>{{ city }}</City> 
+    <State>{{ state }}</State> 
+    <ZipCode>{{ zip }}</ZipCode> 
+    <Country>{{ country }}</Country> 
+    <EmailAddress>{{ email }}</EmailAddress> 
+    <PhoneNumber>{{ phone }}</PhoneNumber> 
+    <IPAddress>{{ ip_address }}</IPAddress> 
+    <InvoiceNumber>{{ invoice_number }}</InvoiceNumber> 
+    <InvoiceDescription>{{ invoice_description }}</InvoiceDescription> 
+    <TransactionDate>{{ transaction_date }}</TransactionDate> 
+  </Request> 
+</QGWRequest>
