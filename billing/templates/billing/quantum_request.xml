@@ -1,35 +1,33 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <QGWRequest> 
-  <Authentication> 
-    <GatewayLogin>{{ gateway_login }}</GatewayLogin> 
-    <GatewayKey>{{ gateway_key }}</GatewayKey> 
-  </Authentication> 
 
-  <Request> 
-    <RequestType>{{ request_type }}</RequestType> 
-    <TransactionType>{{ transaction_type }}</TransactionType> 
-    <PaymentType>{{ payment_type }}</PaymentType> 
-    <Amount>{{ amount }}</Amount> 
-    <CreditCardNumber>{{ cc_number }}</CreditCardNumber> 
-    <ExpireMonth>{{ expire_month }}</ExpireMonth> 
-    <ExpireYear>{{ expire_year }}</ExpireYear> 
-    <CVV2>{{ cvv }}</CVV2> 
-    <ABANumber>{{ aba_number }}</ABANumber> 
-    <AccountNumber>{{ account_number }}</AccountNumber> 
-    <AccountType>{{ account_type }}</AccountType> 
-    <Memo>{{ memo }}</Memo> 
-    <FirstName>{{ first_name }}</FirstName> 
-    <LastName>{{ last_name }}</LastName> 
-    <Address>{{ address }}</Address>
-    <City>{{ city }}</City> 
-    <State>{{ state }}</State> 
-    <ZipCode>{{ zip }}</ZipCode> 
-    <Country>{{ country }}</Country> 
-    <EmailAddress>{{ email }}</EmailAddress> 
-    <PhoneNumber>{{ phone }}</PhoneNumber> 
-    <IPAddress>{{ ip_address }}</IPAddress> 
-    <InvoiceNumber>{{ invoice_number }}</InvoiceNumber> 
-    <InvoiceDescription>{{ invoice_description }}</InvoiceDescription> 
-    <TransactionDate>{{ transaction_date }}</TransactionDate> 
-  </Request> 
+  <Details>
+    <gwLogin>{{ gw_login }}</gwLogin>
+    <RestrictKey>{{ restrict_key }}</RestrictKey>
+    <ResponseType>Response</ResponseType>
+  </Details>
+
+  <TransactionRequest>
+
+    <!-- Required Fields -->
+    <trans_method>CC</trans_method>
+    <ccnum>{{ cc_num }}</ccnum>
+    <ccmo>{{ cc_mo }}</ccmo> 
+    <ccyr>{{ cc_yr }}</ccyr>
+    <amount>{{ amount }}</amount>
+    <BADDR1>{{ b_addr }}</BADDR1>
+    <BZIP1>{{ b_zip }}</BZIP1>
+
+    <!-- Optional Fields -->
+    <BCITY>{{ b_city }}</BCITY>
+    <BSTATE>{{ b_state }}</BSTATE>
+    <BCUST_EMAIL>{{ b_cust_email }}</BCUST_EMAIL>
+    <CVV2>{{ cvv }}</CVV2>
+    <FNAME>{{ f_name }}</FNAME>
+    <LNAME>{{ l_name }}</LNAME>
+    <company>{{ company }}</company>
+    <phone>{{ phone }}</phone>
+    <invoice_description>{{ invoice_description }}</invoice_description> 
+
+  </TransactionRequest>
 </QGWRequest>

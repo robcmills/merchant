@@ -6,7 +6,7 @@ from billing.signals import transaction_was_successful, transaction_was_unsucces
 from billing.utils.credit_card import Visa, MasterCard, Discover, AmericanExpress, InvalidCard
 
 from django.template.loader import render_to_string
-from datetime import datetime
+# from datetime import datetime
 import requests
 from lxml import etree
 
@@ -23,10 +23,10 @@ def xml_to_dict(xml):
 
 class QuantumGateway(Gateway):
     """
-    Quantum Gateway XML Requester 
-    http://www.quantumgateway.com/files/QuantumGatewayXMLRequester.pdf
+    Quantum Gateway XML API:
+    http://www.quantumgateway.com/view_developer.php?Cat1=7
     """
-    request_url = 'https://secure.quantumgateway.com/cgi/xml_requester.php'
+    request_url = 'https://secure.quantumgateway.com/cgi/xml.php'
     supported_cardtypes = [Visa, MasterCard, Discover, AmericanExpress]
     default_currency = "USD"
     display_name = "Quantum"
@@ -37,17 +37,12 @@ class QuantumGateway(Gateway):
     def _build_request_xml(self, amount, credit_card, options):
         # required fields
         data = {
-            'gateway_login': settings.MERCHANT_SETTINGS['gateway_login'],
-            'gateway_key': settings.MERCHANT_SETTINGS['gateway_key'],
-            'request_type': 'ProcessSingleTransaction',
-            'transaction_type': 'CREDIT',
-            'payment_type': 'CC',
-            'amount': amount, 
-            'cc_number': credit_card.number,
-            'expire_month': credit_card.month,
-            'expire_year': credit_card.year,
-            'cvv': credit_card.verification_value,
-            'transaction_date': datetime.today()
+            'gw_login': settings.MERCHANT_SETTINGS['gateway_login'],
+            'restrict_key': settings.MERCHANT_SETTINGS['restrict_key'],
+            'cc_num': credit_card.number,
+            'cc_mo': credit_card.month,
+            'cc_yr': credit_card.year,
+            'amount': amount
         }
         if options:
             data.update(options)
@@ -57,7 +52,7 @@ class QuantumGateway(Gateway):
         response_code = response.status_code
         xml = self._parse_xml(response.text)
         result = xml_to_dict(xml)
-        if result.get('Result').get('ErrorCode'):
+        if result['Request']['Response'] == 'DECLINED':
             transaction_was_unsuccessful.send(self, type=type, 
                 response=response, response_code=response_code)
         else:
